@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${trida.nazev}"></title>
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/normalize.css" th:href="@{/css/normalize.css}">
+  <link rel="stylesheet" href="/css/skeleton.css" th:href="@{/css/skeleton.css}">
+  <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}">
+  <link rel="icon" type="image/png" href="/images/favicon.png" th:href="@{/images/favicon.png}">
+</head>
+<body>
+<main class="container">
+  <h1 th:text="${'Třída ' + trida.nazev}"></h1>
+  <h2 th:text="${'Třídní učitel: ' + trida.tridniUcitel.celeJmeno}"></h2>
+  <table class="u-full-width">
+    <thead>
+    <tr>
+      <th>Studenti</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student: ${trida.studenti}">
+      <td>
+      <a th:href="@{/student/{studentId}(studentId=${student.id})}"
+         th:text="${student.celeJmeno}">{student name}</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+<nav>
+  <a href="/">◂ zpět na seznam tříd</a>
+</nav>
+</body>
+</html>

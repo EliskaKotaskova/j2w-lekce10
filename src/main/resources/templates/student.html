@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${student.celeJmeno}"></title>
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/normalize.css" th:href="@{/css/normalize.css}">
+  <link rel="stylesheet" href="/css/skeleton.css" th:href="@{/css/skeleton.css}">
+  <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}">
+  <link rel="icon" type="image/png" href="/images/favicon.png" th:href="@{/images/favicon.png}">
+</head>
+<body>
+<main class="container">
+  <h1 th:text="${student.celeJmeno}"></h1>
+  <h3>
+    <a th:href="@{/trida/{studentId}(studentId=${student.trida.id})}"
+       th:text="${student.trida.nazev}">
+    </a>
+  </h3>
+  <h2 th:text="${'učitel: ' + student.trida.tridniUcitel.celeJmeno}">
+  </h2>
+  <table class="u-full-width">
+      <tr>
+        <th>Rodiče</th>
+        <th>E-mail</th>
+        <th>Telefon</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="rodic: ${student.rodice}">
+        <td>
+          <a th:href="@{/parent/{parentId}(parentId=${rodic.id})}"
+             th:text="${rodic.celeJmeno}"></a>
+        </td>
+        <td>
+          <span th:unless="${#strings.isEmpty(rodic.email)}" th:text="${rodic.email}"></span>
+          <span th:if="${#strings.isEmpty(rodic.email)}" >není známo</span>
+        </td>
+        <td>
+          <span th:unless="${#strings.isEmpty(rodic.telefon)}" th:text="${rodic.telefon}"></span>
+          <span th:if="${#strings.isEmpty(rodic.telefon)}" >není známo</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </table>
+</main>
+<nav>
+  <a href="/">◂ zpět na seznam tříd</a>
+</nav>
+</body>
+</html>
